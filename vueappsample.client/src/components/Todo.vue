@@ -1,5 +1,8 @@
 <template>
-    todo sample
+    <h1>Todo List</h1>
+    <tr v-for="item in items" :key="items.name">
+        <td>{{ item.name }}</td>
+    </tr>
 </template>
 
 <script lang="ts">
@@ -7,7 +10,7 @@
     import axios from "axios";
 
 
-    //axios.defaults.baseURL = 'http://localhost:7059';
+    //axios.defaults.baseURL = 'http://localhost:7225';
     //axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
     //axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
@@ -23,6 +26,7 @@
         },
         data() {
             return {
+                items: [],
             }
         },
         computed: {
@@ -32,14 +36,12 @@
         beforeCreate() {
         },
         created() {
-
+            this.getTodo();
         },
         beforeMount() {
         },
         mounted() {
-           
-            this.getTodo();
-
+            
         },
         updated() {
         },
@@ -56,7 +58,7 @@
             getTodo: function () {
                 axios.get("https://localhost:7225/api/Todoitems")
                     .then(response => {
-                        this.result = response.data
+                        this.items = response.data
                         console.log(response.data)
                     })
                     .catch(err => {
