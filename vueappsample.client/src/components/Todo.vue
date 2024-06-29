@@ -32,15 +32,14 @@
         beforeCreate() {
         },
         created() {
-           
+
         },
         beforeMount() {
         },
         mounted() {
-            axios.get('https://localhost:7225/api/Todoitems')
-                .then(res => {
-                    console.log(res.data)
-                })
+           
+            this.getTodo();
+
         },
         updated() {
         },
@@ -54,15 +53,16 @@
         },
         methods: {
 
-            //getTodo: function () {
-            //    axios.get("https://localhost:7059/api/Todoitems")
-            //        .then(response => {
-            //            this.result = response.data
-            //        })
-            //        .catch(err => {
-            //            console.error(err)
-            //        })
-            //}
+            getTodo: function () {
+                axios.get("https://localhost:7225/api/Todoitems")
+                    .then(response => {
+                        this.result = response.data
+                        console.log(response.data)
+                    })
+                    .catch(err => {
+                        console.error(err)
+                    })
+            }
 
         },
     });
