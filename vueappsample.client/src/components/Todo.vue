@@ -10,8 +10,15 @@
         Add Todo
     </button>
 
+
     <ul v-for="item in items" :key="items.id">
-        <li>{{ item.name }} : {{ item.isComplete }}</li>
+        <li>
+            {{ item.name }} : {{ item.isComplete }}
+            <button class="btn del_todo" v-on:click="delItem(item.id)">
+                Del
+            </button>
+        </li>
+     
     </ul>
 
 
@@ -48,6 +55,13 @@
             })
 
         }
+        // çƒì«Ç›çûÇ›
+        await getTodo();
+
+    };
+
+    const delItem = async(id) => {
+        await axios.delete("https://localhost:7225/api/Todoitems/" + id)
         // çƒì«Ç›çûÇ›
         await getTodo();
 
