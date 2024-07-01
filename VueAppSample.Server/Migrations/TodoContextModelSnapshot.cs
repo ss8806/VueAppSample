@@ -29,6 +29,9 @@ namespace VueAppSample.Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
+                    b.Property<bool>("Edit")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsComplete")
                         .HasColumnType("bit");
 
