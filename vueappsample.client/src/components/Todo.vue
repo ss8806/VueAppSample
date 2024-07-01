@@ -11,14 +11,24 @@
     </button>
 
 
-    <ul v-for="item in items" :key="items.id">
-        <li>
-            {{ item.name }} : {{ item.isComplete }}
-            <button class="btn del_todo" v-on:click="delItem(item.id)">
-                Del
-            </button>
-        </li>
-     
+    <ul>
+        <transition-group name="fade">
+            <li v-for="item in items" :key="items.id">
+                <span v-if="!item.edit"
+                      v-text="item.name"
+                      v-on:click="changeEdit(item)">
+                </span>
+                <input :type="text"
+                       v-if="item.edit"
+                       v-model="item.name"
+                       v-on:keydown.shift.enter="doUpdate(item, index)">
+                <button class="btn del_todo" v-on:click="updateitem(item.id, item.name)">
+                    Del
+                </button>
+            </li>
+            
+        </transition-group>
+
     </ul>
 
 
@@ -60,12 +70,30 @@
 
     };
 
-    const delItem = async(id) => {
+    const delItem = async (id) => {
         await axios.delete("https://localhost:7225/api/Todoitems/" + id)
         // Ä“Ç‚Ýž‚Ý
         await getTodo();
 
     };
+
+    const changeEdit = (item) => {
+        item.edit = true;
+    };
+
+    const delIupdateItemtem = async (id) => {
+        // “ü—Í‚ð‹ó‚É‚µ‚½‚çíœ‚·‚é
+        //if (item.name === '') {
+        //    await axios.delete("https://localhost:7225/api/Todoitems/" + id);
+        //}
+
+        await axios.put("https://localhost:7225/api/Todoitems" + id, {
+            name: item.name.value,
+        })
+
+        item.edit = false;
+    };
+
 
     //DOM“Ç‚Ýž‚ÝŒã‚É“WŠJ‚·‚é
     onMounted(async () => {
