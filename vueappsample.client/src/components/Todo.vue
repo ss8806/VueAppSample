@@ -2,14 +2,13 @@
     <h1>Todo List</h1>
 
     <input class="inputText"
-           placeholder="Wreite Todo"
+           placeholder="Write Todo"
            v-on:keydown.shift.enter="addItem"
            v-model=todoItem />
 
     <button class="btn add_todo" v-on:click="addItem">
         Add Todo
     </button>
-
 
     <ul>
         <li v-for="item in items" :key="items.id">
@@ -27,8 +26,6 @@
         </li>
 
     </ul>
-
-
 </template>
 
 <script setup lang="ts">
@@ -61,6 +58,8 @@
                 isComplete: false,
             })
 
+            todoItem = '';
+
         }
         // çƒì«Ç›çûÇ›
         await getTodo();
@@ -79,12 +78,13 @@
     };
 
     const updateItem = async (id, item) => {
-
+        if (item.name === '') {
+            await delItem(id)
+        }
         await axios.put("https://localhost:7225/api/Todoitems/" + id, {
             id: item.id,
             name: item.name,
             isComplete: item.isComplete,
-            edit: false
         })
         // çƒì«Ç›çûÇ›
         await getTodo();
@@ -99,4 +99,7 @@
 </script>
 
 <style>
+
+
+
 </style>

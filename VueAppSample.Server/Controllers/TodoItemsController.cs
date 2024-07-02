@@ -24,10 +24,7 @@ namespace VueAppSample.Server.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TodoItem>>> GetTodoItems()
         {
-            
-            var items = await _context.TodoItems.ToListAsync();
-
-            return items;
+            return await _context.TodoItems.ToListAsync();
         }
 
         // GET: api/TodoItems/5
