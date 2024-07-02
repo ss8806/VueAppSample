@@ -78,15 +78,6 @@
         item.edit = true;
     };
 
-    //const delIupdateItemtem = async (id) => {
-    //    // “ü—Í‚ð‹ó‚É‚µ‚½‚çíœ‚·‚é
-    //    //if (item.name === '') {
-    //    //    await axios.delete("https://localhost:7225/api/Todoitems/" + id);
-    //    //}
-
-
-    //};
-
     const updateItem = async (id, item) => {
 
         await axios.put("https://localhost:7225/api/Todoitems/" + id, {
