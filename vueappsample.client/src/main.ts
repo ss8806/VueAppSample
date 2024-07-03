@@ -4,6 +4,6 @@ import App from './App.vue'
 import router from './router';
 
 const app = createApp(App)
-app.use(router) // Vue Router‚ğg—p‚·‚é
+app.use(router) // Vue Routerã‚’ä½¿ç”¨ã™ã‚‹
 app.mount('#app')
 /*createApp(App).mount('#app')*/

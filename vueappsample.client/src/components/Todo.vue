@@ -1,10 +1,8 @@
-<template>
+﻿<template>
 
-    <button class="Home" v-on:click="pushPage()">
-        Home
-    </button>
-
-    <h1>Todo List</h1>
+    <router-link to="/">Home</router-link>
+        
+    <br>
 
     <input class="inputText"
            placeholder="Write Todo"
@@ -21,16 +19,18 @@
                   v-text="item.name"
                   v-on:click="changeEdit(item)">
             </span>
-            <input :type="text"
+            <input type="text"
                    v-if="item.edit"
                    v-model="item.name"
                    v-on:keydown.shift.enter="updateItem(item.id, item)">
+            <button class="detail" v-on:click="pushPage()">
+                詳細
+            </button>
             <button class="btn del_todo" v-on:click="delItem(item.id)">
-                Del
+                消去
             </button>
 
         </li>
-
     </ul>
 </template>
 
@@ -41,7 +41,7 @@
 
     type Items = {
         name: string;
-        isComplete: bool
+        isComplete: boolean
     };
 
     let items = ref<[Items]>([]);
@@ -65,23 +65,23 @@
     };
 
     const addItem = async () => {
-        if (todoItem !== "") {
+        if (todoItem.value !== "") {
             await axios.post("https://localhost:7225/api/Todoitems", {
                 name: todoItem.value,
                 isComplete: false,
             })
 
-            todoItem = '';
+            todoItem.value = '';
 
         }
-        // �ēǂݍ���
+        // 再読み込み
         await getTodo();
 
     };
 
     const delItem = async (id) => {
         await axios.delete("https://localhost:7225/api/Todoitems/" + id)
-        // �ēǂݍ���
+        // 再読み込み
         await getTodo();
 
     };
@@ -99,12 +99,12 @@
             name: item.name,
             isComplete: item.isComplete,
         })
-        // �ēǂݍ���
+        // 再読み込み
         await getTodo();
         item.edit = false;
     };
 
-    //DOM�ǂݍ��݌�ɓW�J����
+    //DOM読み込み後に展開する
     onMounted(async () => {
         await getTodo();
     })

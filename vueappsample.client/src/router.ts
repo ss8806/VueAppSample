@@ -8,7 +8,7 @@ const routes = [
 ]
 
 const router = createRouter({
-    history: createWebHistory(), // HTML5 History モード
+    history: createWebHistory(), // HTML5 History ﾂδつーﾂド
     routes,
 })
 
