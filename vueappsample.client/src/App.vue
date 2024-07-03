@@ -1,7 +1,14 @@
 <script setup lang="ts">
-    import HelloWorld from './components/HelloWorld.vue'
+    //import HelloWorld from './components/HelloWorld.vue'
     import TheWelcome from './components/TheWelcome.vue'
-    import Todo from './components/Todo.vue'
+    //import Todo from './components/Todo.vue'
+    import { useRouter } from 'vue-router'
+
+    const router = useRouter();
+
+    const pushTodo = () => {
+        router.push({ path: "/todo" });
+    };
 
 </script>
 
@@ -15,8 +22,7 @@
     </header>
 
     <main>
-        <!--<TheWelcome />-->
-        <Todo />
+        <router-view />
     </main>
 </template>
 

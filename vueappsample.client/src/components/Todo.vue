@@ -1,4 +1,10 @@
 <template>
+
+
+    <button class="Home" v-on:click="pushPage()">
+        Home
+    </button>
+
     <h1>Todo List</h1>
 
     <input class="inputText"
@@ -23,6 +29,7 @@
             <button class="btn del_todo" v-on:click="delItem(item.id)">
                 Del
             </button>
+
         </li>
 
     </ul>
@@ -31,6 +38,7 @@
 <script setup lang="ts">
     import { ref, onMounted, defineComponent } from 'vue';
     import axios from "axios";
+    import { useRouter } from 'vue-router'
 
     type Items = {
         name: string;
@@ -39,6 +47,12 @@
 
     let items = ref<[Items]>([]);
     let todoItem = ref("");
+
+    const router = useRouter();
+
+    const pushPage = () => {
+        router.push({ path: "/" });
+    };
 
     const getTodo = () => {
         axios.get("https://localhost:7225/api/Todoitems")
@@ -99,7 +113,4 @@
 </script>
 
 <style>
-
-
-
 </style>
