@@ -14,12 +14,7 @@
 
 <template>
 
-    <!--<router-view></router-view>-->
     <router-link to="/todo">ToDo</router-link>
-    <!--<button class="Home" v-on:click="pushHome()">
-        Home
-    </button>-->
-
 
     <WelcomeItem>
         <template #icon>

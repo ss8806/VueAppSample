@@ -1,6 +1,5 @@
 <template>
 
-
     <button class="Home" v-on:click="pushPage()">
         Home
     </button>
@@ -36,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-    import { ref, onMounted, defineComponent } from 'vue';
+    import { ref, onMounted } from 'vue';
     import axios from "axios";
     import { useRouter } from 'vue-router'
 
